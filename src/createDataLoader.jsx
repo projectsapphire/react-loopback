@@ -196,7 +196,7 @@ export function createDataLoader(Component, options = {}) {
        *                          receive
        */
       _transform_object(json, data, filter, params, {id = 'id', reset = false}) {
-        const newData = _.indexBy(json, id);
+        const newData = _.keyBy(json, id);
         if (reset) {
           return newData;
         }
@@ -209,7 +209,7 @@ export function createDataLoader(Component, options = {}) {
      */
     componentWillMount() {
       // creates internal structures
-      this._queries = _.indexBy(DataLoader._normalizeQueries(options.queries), 'name');
+      this._queries = _.keyBy(DataLoader._normalizeQueries(options.queries), 'name');
       this._data = _(this._queries)
         .map(q => [q.name, []])
         .zipObject()
